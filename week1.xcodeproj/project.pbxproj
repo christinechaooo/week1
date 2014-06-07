@@ -19,6 +19,8 @@
 		77A5CBE01942A027002EDA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A5CBC81942A027002EDA39 /* UIKit.framework */; };
 		77A5CBE81942A028002EDA39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77A5CBE61942A028002EDA39 /* InfoPlist.strings */; };
 		77A5CBEA1942A028002EDA39 /* week1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A5CBE91942A028002EDA39 /* week1Tests.m */; };
+		77A5CBF61942A065002EDA39 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A5CBF41942A065002EDA39 /* MainViewController.m */; };
+		77A5CBF71942A065002EDA39 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77A5CBF51942A065002EDA39 /* MainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 		77A5CBE51942A028002EDA39 /* week1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "week1Tests-Info.plist"; sourceTree = "<group>"; };
 		77A5CBE71942A028002EDA39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77A5CBE91942A028002EDA39 /* week1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = week1Tests.m; sourceTree = "<group>"; };
+		77A5CBF31942A065002EDA39 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		77A5CBF41942A065002EDA39 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		77A5CBF51942A065002EDA39 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +116,9 @@
 				77A5CBD41942A027002EDA39 /* AppDelegate.m */,
 				77A5CBD61942A027002EDA39 /* Images.xcassets */,
 				77A5CBCB1942A027002EDA39 /* Supporting Files */,
+				77A5CBF31942A065002EDA39 /* MainViewController.h */,
+				77A5CBF41942A065002EDA39 /* MainViewController.m */,
+				77A5CBF51942A065002EDA39 /* MainViewController.xib */,
 			);
 			path = week1;
 			sourceTree = "<group>";
@@ -220,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77A5CBCF1942A027002EDA39 /* InfoPlist.strings in Resources */,
+				77A5CBF71942A065002EDA39 /* MainViewController.xib in Resources */,
 				77A5CBD71942A027002EDA39 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77A5CBD51942A027002EDA39 /* AppDelegate.m in Sources */,
+				77A5CBF61942A065002EDA39 /* MainViewController.m in Sources */,
 				77A5CBD11942A027002EDA39 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
