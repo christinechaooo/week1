@@ -28,6 +28,8 @@
     [super viewDidLoad];
     [[self view] setBackgroundColor:[UIColor colorWithRed:211.0/255.0 green:214.0/255.0 blue:219.0/255.0 alpha:1]];
     
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
     self.navigationItem.title = @"Post";
     
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back"] style:UIBarButtonItemStylePlain target:self action:nil];
@@ -35,6 +37,9 @@
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share-white"] style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 400, 320, 320)];
+    [self.view addSubview:containerView];
 }
 
 - (void)didReceiveMemoryWarning
