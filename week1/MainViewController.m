@@ -38,7 +38,8 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share-white"] style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 400, 320, 320)];
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(12, 78, 296, 480)];
+    containerView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:containerView];
 }
 
