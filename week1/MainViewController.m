@@ -165,7 +165,25 @@
     [likeButton setImage:[UIImage imageNamed:@"like_btn_selected"] forState:UIControlStateHighlighted];
     [likeButton setImage:[UIImage imageNamed:@"like_btn_selected"] forState:UIControlStateSelected | UIControlStateHighlighted];
     
+    UIButton *commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    commentButton.frame = CGRectMake(95, 0, 100, 44);
+    commentButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+    commentButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, likeButton.imageView.frame.size.width - 25);
+    [commentButton setTitle:@"Comment" forState:UIControlStateNormal];
+    [commentButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [commentButton setImage:[UIImage imageNamed:@"comment_btn"] forState:UIControlStateNormal];
+    
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareButton.frame = CGRectMake(198, 0, 100, 44);
+    shareButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+    shareButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, likeButton.imageView.frame.size.width - 28);
+    [shareButton setTitle:@"Share" forState:UIControlStateNormal];
+    [shareButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"share_btn"] forState:UIControlStateNormal];
+    
     [actionBarView addSubview:likeButton];
+    [actionBarView addSubview:commentButton];
+    [actionBarView addSubview:shareButton];
     [self.commentView addSubview:commentTextField];
     [self.commentView addSubview:postLabel];
 
@@ -226,7 +244,7 @@
     NSTimeInterval animationDuration = durationValue.doubleValue;
     NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
     UIViewAnimationCurve animationCurve = curveValue.intValue;
-    
+    NSLog(@"animation duration %f", animationDuration);
     // Move the view with the same duration and animation curve so that it will match with the keyboard animation
     [UIView animateWithDuration:animationDuration
                           delay:0
