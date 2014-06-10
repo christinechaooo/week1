@@ -131,6 +131,41 @@
     postLabel.textColor = lightGray;
     postLabel.font = [UIFont boldSystemFontOfSize:16];
     
+    UIView *actionBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 330, 296, 44)];
+    actionBarView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
+    actionBarView.layer.borderColor = [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+    actionBarView.layer.borderWidth = 1;
+    
+    TTTAttributedLabel *likeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(13, 370, 320, 44)];
+    likeLabel.font = [UIFont systemFontOfSize:13];
+    likeLabel.numberOfLines = 0;
+    
+    NSString *likeText = @"1,675 people like this.";
+    [likeLabel setText:likeText afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        NSRange boldRange = [[mutableAttributedString string] rangeOfString:@"1,675 people" options:NSCaseInsensitiveSearch];
+        
+        // Core Text APIs use C functions without a direct bridge to UIFont. See Apple's "Core Text Programming Guide" to learn how to configure string attributes.
+        CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)boldFont.fontName, boldFont.pointSize, NULL);
+        if (font) {
+            [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:boldRange];
+            CFRelease(font);
+        }
+        
+        return mutableAttributedString;
+    }];
+    
+    UIButton *likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    likeButton.frame = CGRectMake(8, 0, 60, 44);
+    likeButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+    likeButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, likeButton.imageView.frame.size.width - 10);
+    [likeButton setTitle:@"Like" forState:UIControlStateNormal];
+    [likeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [likeButton setImage:[UIImage imageNamed:@"like_btn"] forState:UIControlStateNormal];
+    [likeButton setImage:[UIImage imageNamed:@"like_btn_selected"] forState:UIControlStateSelected];
+    [likeButton setImage:[UIImage imageNamed:@"like_btn_selected"] forState:UIControlStateHighlighted];
+    [likeButton setImage:[UIImage imageNamed:@"like_btn_selected"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    
+    [actionBarView addSubview:likeButton];
     [self.commentView addSubview:commentTextField];
     [self.commentView addSubview:postLabel];
 
@@ -142,6 +177,8 @@
     [postBgView addSubview:titleLabel];
     [postBgView addSubview:postDateLabel];
     [postBgView addSubview:contentLabel];
+    [postBgView addSubview:likeLabel];
+    [postBgView addSubview:actionBarView];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapRecognizer];
