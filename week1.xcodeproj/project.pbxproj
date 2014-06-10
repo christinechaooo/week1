@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77704872194764BF009B2625 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77704871194764BF009B2625 /* TTTAttributedLabel.m */; };
 		77762B541946D774009806BE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77762B531946D774009806BE /* CoreText.framework */; };
-		77762B571946D7F4009806BE /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77762B561946D7F4009806BE /* TTTAttributedLabel.m */; };
 		77A5CBC51942A027002EDA39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A5CBC41942A027002EDA39 /* Foundation.framework */; };
 		77A5CBC71942A027002EDA39 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A5CBC61942A027002EDA39 /* CoreGraphics.framework */; };
 		77A5CBC91942A027002EDA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A5CBC81942A027002EDA39 /* UIKit.framework */; };
@@ -36,9 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		77704870194764BF009B2625 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = "../../../iOS reference/TTTAttributedLabel-master/TTTAttributedLabel/TTTAttributedLabel.h"; sourceTree = "<group>"; };
+		77704871194764BF009B2625 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = "../../../iOS reference/TTTAttributedLabel-master/TTTAttributedLabel/TTTAttributedLabel.m"; sourceTree = "<group>"; };
 		77762B531946D774009806BE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		77762B551946D7F4009806BE /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = "../../TTTAttributedLabel-master/TTTAttributedLabel/TTTAttributedLabel.h"; sourceTree = "<group>"; };
-		77762B561946D7F4009806BE /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = "../../TTTAttributedLabel-master/TTTAttributedLabel/TTTAttributedLabel.m"; sourceTree = "<group>"; };
 		77A5CBC11942A027002EDA39 /* week1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = week1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A5CBC41942A027002EDA39 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77A5CBC61942A027002EDA39 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,8 +126,8 @@
 				77A5CBF31942A065002EDA39 /* MainViewController.h */,
 				77A5CBF41942A065002EDA39 /* MainViewController.m */,
 				77A5CBF51942A065002EDA39 /* MainViewController.xib */,
-				77762B551946D7F4009806BE /* TTTAttributedLabel.h */,
-				77762B561946D7F4009806BE /* TTTAttributedLabel.m */,
+				77704870194764BF009B2625 /* TTTAttributedLabel.h */,
+				77704871194764BF009B2625 /* TTTAttributedLabel.m */,
 			);
 			path = week1;
 			sourceTree = "<group>";
@@ -260,7 +260,7 @@
 				77A5CBD51942A027002EDA39 /* AppDelegate.m in Sources */,
 				77A5CBF61942A065002EDA39 /* MainViewController.m in Sources */,
 				77A5CBD11942A027002EDA39 /* main.m in Sources */,
-				77762B571946D7F4009806BE /* TTTAttributedLabel.m in Sources */,
+				77704872194764BF009B2625 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
