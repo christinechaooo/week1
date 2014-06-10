@@ -11,6 +11,10 @@
 
 @interface MainViewController ()
 
+@property (nonatomic,strong) UIView *commentView;
+- (void)willShowKeyboard:(NSNotification *)notification;
+- (void)willHideKeyboard:(NSNotification *)notification;
+- (void)hideKeyboard;
 @end
 
 @implementation MainViewController
@@ -19,7 +23,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
@@ -31,6 +36,7 @@
     
     const CGFloat fontSize = 14;
     UIFont *boldFont = [UIFont boldSystemFontOfSize:fontSize];
+    UIColor *lightGray = [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:1];
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
@@ -54,17 +60,17 @@
     postBgView.layer.shadowRadius = 1;
     postBgView.layer.cornerRadius = 2;
     postBgView.layer.borderWidth = 1;
-    postBgView.layer.borderColor = [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:1].CGColor;
+    postBgView.layer.borderColor = lightGray.CGColor;
     [containerView addSubview:postBgView];
     
     UIImage *profilePic = [UIImage  imageNamed:@"her_profile_pic"];
     UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(12, 12, 47, 47)];
     profileImageView.image = profilePic;
     
-    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 415, 320, 44)];
-    commentView.layer.borderColor = [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-    commentView.layer.borderWidth = 1;
-    commentView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
+    self.commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 479, 320, 44)];
+    self.commentView.layer.borderColor = [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+    self.commentView.layer.borderWidth = 1;
+    self.commentView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(68, 16, 100, 20)];
     titleLabel.text = @"Her";
@@ -75,13 +81,13 @@
     postDateLabel.textColor = [UIColor grayColor];
     postDateLabel.font = [UIFont systemFontOfSize:12];
     
-    TTTAttributedLabel *postLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(12, 52, 270, 100)];
-    postLabel.font = [UIFont systemFontOfSize:13];
-    postLabel.numberOfLines = 0;
-    postLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    TTTAttributedLabel *contentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(12, 52, 270, 100)];
+    contentLabel.font = [UIFont systemFontOfSize:13];
+    contentLabel.numberOfLines = 0;
+    contentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
     
     NSString *postText = @"From collarless shirts to high-waisted pants, #Her's costume designer, Casey Storm, explains how he created his fashion looks for the future: http://bit.ly/1jV9zM8";
-    [postLabel setText:postText afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+    [contentLabel setText:postText afterInheritingLabelAttributesAndConfiguringWithBlock:^ NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
         NSRange boldRange = [[mutableAttributedString string] rangeOfString:@"Her" options:NSCaseInsensitiveSearch];
         
         // Core Text APIs use C functions without a direct bridge to UIFont. See Apple's "Core Text Programming Guide" to learn how to configure string attributes.
@@ -99,8 +105,8 @@
                      , nil];
     NSArray *objects = [[NSArray alloc] initWithObjects:[UIColor colorWithRed:68.0/255.0 green:98.0/255.0 blue:161.0/255.0 alpha:1],[NSNumber numberWithInt:kCTUnderlineStyleNone], nil];
     NSDictionary *linkAttributes = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
-    postLabel.linkAttributes = linkAttributes;
-    [postLabel addLinkToURL:[NSURL URLWithString:@"http://bit.ly/1jV9zM8"] withRange:linkRange];
+    contentLabel.linkAttributes = linkAttributes;
+    [contentLabel addLinkToURL:[NSURL URLWithString:@"http://bit.ly/1jV9zM8"] withRange:linkRange];
     
     UIImage *promoImage = [UIImage  imageNamed:@"her_promo_img"];
     UIImageView *promoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 155, 310, 175)];
@@ -111,7 +117,7 @@
     promoImageView.image = promoImage;
     
     UIImage *tabBar = [UIImage  imageNamed:@"tabbar"];
-    UIImageView *tabBarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 458, 320, 45)];
+    UIImageView *tabBarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 522, 320, 45)];
     tabBarImageView.image = tabBar;
     
     UITextField *commentTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 5, 240, 34)];
@@ -120,16 +126,25 @@
     UIColor *gray = [UIColor grayColor];
     commentTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Write a comment..." attributes:@{NSForegroundColorAttributeName: gray}];
     
-    [commentView addSubview:commentTextField];
+    UILabel *postLabel = [[UILabel alloc] initWithFrame:CGRectMake(267, 8, 50, 30)];
+    postLabel.text = @"Post";
+    postLabel.textColor = lightGray;
+    postLabel.font = [UIFont boldSystemFontOfSize:16];
+    
+    [self.commentView addSubview:commentTextField];
+    [self.commentView addSubview:postLabel];
 
     [containerView addSubview:promoImageView];
-    [containerView addSubview:commentView];
-    [containerView addSubview:tabBarImageView];
+    [self.view addSubview:self.commentView];
+    [self.view addSubview:tabBarImageView];
     
     [postBgView addSubview:profileImageView];
     [postBgView addSubview:titleLabel];
     [postBgView addSubview:postDateLabel];
-    [postBgView addSubview:postLabel];
+    [postBgView addSubview:contentLabel];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.view addGestureRecognizer:tapRecognizer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,5 +152,53 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)willShowKeyboard:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    
+    // Get the keyboard height and width from the notification
+    // Size varies depending on OS, language, orientation
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    NSLog(@"Height: %f Width: %f", kbSize.height, kbSize.width);
+    
+    // Get the animation duration and curve from the notification
+    NSNumber *durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration = durationValue.doubleValue;
+    NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    UIViewAnimationCurve animationCurve = curveValue.intValue;
+    
+    // Move the view with the same duration and animation curve so that it will match with the keyboard animation
+    [UIView animateWithDuration:animationDuration
+                          delay:0.02
+                        options:(animationCurve << 16)
+                     animations:^{
+                         self.commentView.frame = CGRectMake(0, self.view.frame.size.height - kbSize.height - self.commentView.frame.size.height, self.commentView.frame.size.width, self.commentView.frame.size.height);
+                     }
+                     completion:nil];
+}
+
+-(void)hideKeyboard {
+    [self.view endEditing:YES];
+}
+
+- (void)willHideKeyboard:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    
+    // Get the animation duration and curve from the notification
+    NSNumber *durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration = durationValue.doubleValue;
+    NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    UIViewAnimationCurve animationCurve = curveValue.intValue;
+    
+    // Move the view with the same duration and animation curve so that it will match with the keyboard animation
+    [UIView animateWithDuration:animationDuration
+                          delay:0
+                        options:(animationCurve << 16)
+                     animations:^{
+                         self.commentView.frame = CGRectMake(0, 479, self.commentView.frame.size.width, self.commentView.frame.size.height);
+                     }
+                     completion:nil];
+}
+
 
 @end
